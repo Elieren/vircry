@@ -2,7 +2,7 @@
 ## Vircry Framework
 Vircry is a framework that generates backdoors.
 
-For gluing apk with backdoor, [Evil-droid]('https://github.com/M4sc3r4n0/Evil-Droid') developments were used.
+For gluing apk with backdoor, [Evil-droid](https://github.com/M4sc3r4n0/Evil-Droid) developments were used.
 
 # Platforms
 ```
