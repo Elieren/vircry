@@ -30,6 +30,8 @@ try:
     
         platform = str(input(': '))
         os.system('clear')
+        print(Fore.GREEN + banner + Style.RESET_ALL)
+        print()
 
         if platform == '1':
             print('[1] Bind Shell')
