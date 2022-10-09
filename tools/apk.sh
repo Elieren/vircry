@@ -712,8 +712,8 @@ function main()
     error
     sleep 2
     echo
-    $(rm -r dir_apk.txt)
-    $(rm -r host.txt)
-    $(rm -r port.txt)
+    $(rm -r tools/dir_apk.txt)
+    $(rm -r tools/host.txt)
+    $(rm -r tools/port.txt)
 }
 main
