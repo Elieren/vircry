@@ -19,6 +19,7 @@ For the correct operation of the program, the __metasploit-framework__ is gentle
 
 ```
 $ sudo su
+$ cd vircry
 $ chmod +x tools/apk.sh
 $ python3 start.py
 ```
