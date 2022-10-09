@@ -50,7 +50,7 @@ elif platform == '2':
 
 elif platform == '3':
     print('[1] Create apk')
-    print('[2] Backdoor apk original')
+    print('[2] Backdoor apk original (gui)')
     nam = int(input(': '))
     android(nam)
 
