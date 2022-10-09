@@ -4,6 +4,7 @@ import os
 from shell import *
 
 try:
+    os.system('clear')
     banner = '''
     ██▒   █▓ ██▓ ██▀███   ▄████▄   ██▀███ ▓██   ██▓
     ▓██░   █▒▓██▒▓██ ▒ ██▒▒██▀ ▀█  ▓██ ▒ ██▒▒██  ██▒
