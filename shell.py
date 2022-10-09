@@ -109,7 +109,7 @@ def android(namder):
         port = str(input('lport: '))
         directory = str(input('Original apk: '))
 
-        print('apk create: tools/evilapk/')
+        print('apk create: evilapk/')
 
         with open('tools/host.txt', 'w') as file:
             file.write(host)
