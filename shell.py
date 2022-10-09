@@ -106,16 +106,16 @@ def android(namder):
     
     elif namder == 2:
         host = str(input('lhost: '))
-        port = int(input('lport: '))
+        port = str(input('lport: '))
         directory = str(input('Original apk: '))
 
         print('apk create: tools/evilapk/')
 
         with open('tools/host.txt', 'wb') as file:
-            file.write((host))
+            file.write(host)
         
         with open('tools/port.txt', 'wb') as file:
-            file.write((port))
+            file.write(port)
         
         with open('tools/dir_apk.txt', 'wb') as file:
             file.write(directory)
