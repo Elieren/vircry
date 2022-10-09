@@ -76,6 +76,7 @@ echo -e $yellow"[*] Thanks For Using Evil-Droid  :)"
 exit
 }
 #detect system
+clear
 echo -e $blue
 sudo cat /etc/issue.net
 #check dependencies existence
