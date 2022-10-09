@@ -30,7 +30,7 @@ try:
     
         platform = str(input(': '))
         os.system('clear')
-        print(Fore.GREEN + banner + Style.RESET_ALL)
+        print(Fore.GREEN + banner + Fore.YELLOW)
         print()
 
         if platform == '1':
