@@ -4,7 +4,7 @@ import os
 def windows(namder):
     if namder == 1:
         port = int(input('lport: '))
-        directory = str(input('dir: '))
+        directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
@@ -16,7 +16,7 @@ def windows(namder):
     elif (namder == 2) or (namder == 4) or (namder == 5) or (namder == 7) or (namder == 8):
         host = str(input('lhost: '))
         port = int(input('lport: '))
-        directory = str(input('dir: '))
+        directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
@@ -40,7 +40,7 @@ def windows(namder):
     
     elif namder == 3:
         host = str(input('lhost: '))
-        directory = str(input('dir: '))
+        directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
@@ -63,7 +63,7 @@ def linux(namder):
     if (namder == 1) or (namder == 2):
         host = str(input('lhost: '))
         port = int(input('lport: '))
-        directory = str(input('dir: '))
+        directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
@@ -78,7 +78,7 @@ def linux(namder):
     
     elif namder == 3:
         port = int(input('lport: '))
-        directory = str(input('dir: '))
+        directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
@@ -95,7 +95,7 @@ def android(namder):
     if namder == 1:
         host = str(input('lhost: '))
         port = int(input('lport: '))
-        directory = str(input('dir: '))
+        directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
@@ -135,7 +135,7 @@ def mac(namder):
     if namder == 1:
         host = str(input('lhost: '))
         port = int(input('lport: '))
-        directory = str(input('dir: '))
+        directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
@@ -146,7 +146,7 @@ def mac(namder):
     
     elif namder == 2:
         port = int(input('lport: '))
-        directory = str(input('dir: '))
+        directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
