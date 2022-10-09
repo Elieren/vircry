@@ -121,6 +121,10 @@ def android(namder):
             file.write(directory)
         
         os.system('./tools/apk.sh')
+
+        os.remove('tools/host.txt')
+        os.remove('tools/port.txt')
+        os.remove('tools/dir_apk.txt')
     
     else:
         print('\nError')
