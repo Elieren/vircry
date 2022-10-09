@@ -29,57 +29,86 @@ try:
         print('4) OS X')
     
         platform = str(input(': '))
+        ret = 1
 
         if platform == '1':
-            print('[1] Bind Shell')
-            print('[2] Reverse Shell')
-            print('[3] Reverse HTTPS')
-            print('[4] Bind Shell (Netcat)')
-            print('[5] Reverse Shell (Netcat)')
-            print('[6] Microsoft macro')
-            print('[7] Vnc')
-            print('[8] PowerShell (bat)')
-            print('[0] Exit')
-            nam = int(input(': '))
-            if nam != 0:
-                windows(nam)
-                break
-            else:
-                pass
+            while ret == 1:
+                os.system('clear')
+                print(Fore.GREEN + banner + Fore.YELLOW)
+                print()
+                print('[1] Bind Shell')
+                print('[2] Reverse Shell')
+                print('[3] Reverse HTTPS')
+                print('[4] Bind Shell (Netcat)')
+                print('[5] Reverse Shell (Netcat)')
+                print('[6] Microsoft macro')
+                print('[7] Vnc')
+                print('[8] PowerShell (bat)')
+                print('[0] Exit')
+                nam = int(input(': '))
+                if nam != 0:
+                    a = windows(nam)
+                    if a == 1:
+                        break
+                    else:
+                        pass
+                else:
+                    ret = 0
 
         elif platform == '2':
-            print('[1] Reverse Shell (elf)')
-            print('[2] Reverse Shell (Python)')
-            print('[3] Bind Shell (elf)')
-            print('[0] Exit')
-            nam = int(input(': '))
-            if nam != 0:
-                linux(nam)
-                break
-            else:
-                pass
+            while ret == 1:
+                os.system('clear')
+                print(Fore.GREEN + banner + Fore.YELLOW)
+                print()
+                print('[1] Reverse Shell (elf)')
+                print('[2] Reverse Shell (Python)')
+                print('[3] Bind Shell (elf)')
+                print('[0] Exit')
+                nam = int(input(': '))
+                if nam != 0:
+                    a = linux(nam)
+                    if a == 1:
+                        break
+                    else:
+                        pass
+                else:
+                    ret = 0
 
         elif platform == '3':
-            print('[1] Create apk')
-            print('[2] Backdoor apk original (gui)')
-            print('[0] Exit')
-            nam = int(input(': '))
-            if nam != 0:
-                android(nam)
-                break
-            else:
-                pass
+            while ret == 1:
+                os.system('clear')
+                print(Fore.GREEN + banner + Fore.YELLOW)
+                print()
+                print('[1] Create apk')
+                print('[2] Backdoor apk original (gui)')
+                print('[0] Exit')
+                nam = int(input(': '))
+                if nam != 0:
+                    a = android(nam)
+                    if a == 1:
+                        break
+                    else:
+                        pass
+                else:
+                    ret = 0
 
         elif platform == '4':
-            print('[1] Reverse Shell')
-            print('[2] Bind Shell')
-            print('[0] Exit')
-            nam = int(input(': '))
-            if nam != 0:
-                mac(nam)
-                break
-            else:
-                pass
+            while ret == 1:
+                os.system('clear')
+                print(Fore.GREEN + banner + Fore.YELLOW)
+                print()
+                print('[1] Reverse Shell')
+                print('[2] Bind Shell')
+                print('[0] Exit')
+                nam = int(input(': '))
+                if nam != 0:
+                    a = mac(nam)
+                    if a == 1:
+                        break
+                    else:
+                        pass
+                else:
+                    ret = 0
         
         else:
             pass

