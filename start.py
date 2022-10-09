@@ -42,9 +42,9 @@ if platform == '1':
     windows(nam)
 
 elif platform == '2':
-    print('[1] Reverse Shell (Bash)')
+    print('[1] Reverse Shell (elf)')
     print('[2] Reverse Shell (Python)')
-    print('[3] Bind Shell (bash)')
+    print('[3] Bind Shell (elf)')
     nam = int(input(': '))
     linux(nam)
 
