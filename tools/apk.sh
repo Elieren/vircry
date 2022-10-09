@@ -230,12 +230,12 @@ echo -e $lightgreen "     Mascerano Bachir - Dev-labs     "
 #function lhost
 function get_lhost() 
 {
-  LHOST=$(cat host.txt)
+  LHOST=$(cat tools/host.txt)
 }
 #function lport
 function get_lport() 
 {
-  LPORT=$(cat port.txt)
+  LPORT=$(cat tools/port.txt)
 }
 #function payload
 function get_payload()
@@ -254,7 +254,7 @@ function payload_name()
 #function original apk
 function orig_apk()
 {
- orig=$(cat dir_apk.txt)
+ orig=$(cat tools/dir_apk.txt)
 }
 #function change icon
 function change_icon()
