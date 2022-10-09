@@ -60,7 +60,7 @@ def windows(namder):
         print('\nError')
 
 def linux(namder):
-    if namder == 1 or 2:
+    if (namder == 1) or (namder == 2):
         host = str(input('lhost: '))
         port = int(input('lport: '))
         directory = str(input('dir: '))
