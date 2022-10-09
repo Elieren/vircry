@@ -111,13 +111,13 @@ def android(namder):
 
         print('apk create: tools/evilapk/')
 
-        with open('tools/host.txt', 'wb') as file:
+        with open('tools/host.txt', 'w') as file:
             file.write(host)
         
-        with open('tools/port.txt', 'wb') as file:
+        with open('tools/port.txt', 'w') as file:
             file.write(port)
         
-        with open('tools/dir_apk.txt', 'wb') as file:
+        with open('tools/dir_apk.txt', 'w') as file:
             file.write(directory)
         
         os.system('./tools/apk.sh')
