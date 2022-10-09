@@ -5,6 +5,7 @@ from shell import *
 
 try:
     os.system('clear')
+    res = True
     banner = '''
     ██▒   █▓ ██▓ ██▀███   ▄████▄   ██▀███ ▓██   ██▓
     ▓██░   █▒▓██▒▓██ ▒ ██▒▒██▀ ▀█  ▓██ ▒ ██▒▒██  ██▒
@@ -19,7 +20,7 @@ try:
                                         by Elieren
     '''
     
-    while True:
+    while res:
         print(Fore.GREEN + banner + Fore.YELLOW)
         print(Fore.YELLOW + 'Create backdoor for:')
         print()
@@ -49,7 +50,8 @@ try:
                 if nam != 0:
                     a = windows(nam)
                     if a == 1:
-                        break
+                        res = False
+                        ret = 0
                     else:
                         pass
                 else:
@@ -68,7 +70,8 @@ try:
                 if nam != 0:
                     a = linux(nam)
                     if a == 1:
-                        break
+                        res = False
+                        ret = 0
                     else:
                         pass
                 else:
@@ -86,7 +89,8 @@ try:
                 if nam != 0:
                     a = android(nam)
                     if a == 1:
-                        break
+                        res = False
+                        ret = 0
                     else:
                         pass
                 else:
@@ -104,7 +108,8 @@ try:
                 if nam != 0:
                     a = mac(nam)
                     if a == 1:
-                        break
+                        res = False
+                        ret = 0
                     else:
                         pass
                 else:
