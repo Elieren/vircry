@@ -46,6 +46,8 @@ try:
                 print('[7] Vnc')
                 print('[8] PowerShell (bat)')
                 print('[9] Execut (exe)')
+                print('[10] Reverse Shell (Python)')
+                print('[11] Bind Shell (Python)')
                 print('[0] Exit')
                 nam = int(input(': '))
                 if nam != 0:
@@ -67,6 +69,7 @@ try:
                 print('[2] Reverse Shell (Python)')
                 print('[3] Bind Shell (elf)')
                 print('[4] Execut (elf)')
+                print('[5] Bind Shell (Python)')
                 print('[0] Exit')
                 nam = int(input(': '))
                 if nam != 0:
@@ -106,6 +109,8 @@ try:
                 print('[1] Reverse Shell')
                 print('[2] Bind Shell')
                 print('[3] Execut')
+                print('[4] Reverse Shell (Python)')
+                print('[5] Bind Shell (Python)')
                 print('[0] Exit')
                 nam = int(input(': '))
                 if nam != 0:
