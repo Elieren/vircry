@@ -45,6 +45,7 @@ try:
                 print('[6] Microsoft macro')
                 print('[7] Vnc')
                 print('[8] PowerShell (bat)')
+                print('[9] Execut (exe)')
                 print('[0] Exit')
                 nam = int(input(': '))
                 if nam != 0:
@@ -65,6 +66,7 @@ try:
                 print('[1] Reverse Shell (elf)')
                 print('[2] Reverse Shell (Python)')
                 print('[3] Bind Shell (elf)')
+                print('[4] Execut (elf)')
                 print('[0] Exit')
                 nam = int(input(': '))
                 if nam != 0:
