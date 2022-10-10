@@ -105,6 +105,7 @@ try:
                 print()
                 print('[1] Reverse Shell')
                 print('[2] Bind Shell')
+                print('[3] Execut')
                 print('[0] Exit')
                 nam = int(input(': '))
                 if nam != 0:
