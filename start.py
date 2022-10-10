@@ -111,6 +111,7 @@ try:
                 print('[3] Execut')
                 print('[4] Reverse Shell (Python)')
                 print('[5] Bind Shell (Python)')
+                print('[6] Microsoft macro')
                 print('[0] Exit')
                 nam = int(input(': '))
                 if nam != 0:
