@@ -4,7 +4,6 @@ import os
 from shell import *
 
 try:
-    os.system('clear')
     res = True
     banner = '''
     ██▒   █▓ ██▓ ██▀███   ▄████▄   ██▀███ ▓██   ██▓
@@ -21,9 +20,10 @@ try:
     '''
     
     while res:
+        os.system('clear')
         print(Fore.GREEN + banner + Fore.YELLOW)
         print(Fore.YELLOW + 'Create backdoor for:')
-        print()
+        
         print('1) Windows')
         print('2) linux')
         print('3) Android')
@@ -36,7 +36,7 @@ try:
             while ret == 1:
                 os.system('clear')
                 print(Fore.GREEN + banner + Fore.YELLOW)
-                print()
+                
                 print('[1] Bind Shell')
                 print('[2] Reverse Shell')
                 print('[3] Reverse HTTPS')
@@ -64,7 +64,7 @@ try:
             while ret == 1:
                 os.system('clear')
                 print(Fore.GREEN + banner + Fore.YELLOW)
-                print()
+                
                 print('[1] Reverse Shell (elf)')
                 print('[2] Reverse Shell (Python)')
                 print('[3] Bind Shell (elf)')
@@ -86,7 +86,7 @@ try:
             while ret == 1:
                 os.system('clear')
                 print(Fore.GREEN + banner + Fore.YELLOW)
-                print()
+                
                 print('[1] Create apk')
                 print('[2] Backdoor apk original (gui)')
                 print('[0] Exit')
@@ -105,7 +105,7 @@ try:
             while ret == 1:
                 os.system('clear')
                 print(Fore.GREEN + banner + Fore.YELLOW)
-                print()
+                
                 print('[1] Reverse Shell')
                 print('[2] Bind Shell')
                 print('[3] Execut')
@@ -126,7 +126,6 @@ try:
         
         else:
             pass
-        os.system('clear')
 
 except:
     print('Good bye.')

